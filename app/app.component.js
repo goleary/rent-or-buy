@@ -27,8 +27,8 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <h1>My First 2 App</h1>\n        <input type=\"text\" pInputText [(ngModel)]=\"text\" />\n        {{text}}\n    ",
-                        directives: [primeng_1.InputText]
+                        template: "\n        <h1>My First 2 App</h1>\n        <input type=\"text\" pInputText [(ngModel)]=\"text\" />\n        {{text}}\n        <p-slider [(ngModel)]=\"val\"></p-slider>\n        {{val}}\n    ",
+                        directives: [primeng_1.InputText, primeng_1.Slider]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

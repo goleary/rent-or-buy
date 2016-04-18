@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {InputText} from 'primeng/primeng';
+import {InputText, Slider} from 'primeng/primeng';
 
 @Component({
 	selector: 'my-app',
@@ -7,10 +7,12 @@ import {InputText} from 'primeng/primeng';
         <h1>My First 2 App</h1>
         <input type="text" pInputText [(ngModel)]="text" />
         {{text}}
+        <p-slider [(ngModel)]="val"></p-slider>
+        {{val}}
     `,
-    directives: [InputText]
+    directives: [InputText, Slider]
 })
 export class AppComponent {
-
+    val: number;
     text: string;
 }
