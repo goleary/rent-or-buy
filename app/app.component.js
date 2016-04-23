@@ -24,10 +24,13 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
             AppComponent = (function () {
                 function AppComponent() {
                 }
+                AppComponent.prototype.ngOnInit = function () {
+                    this.val = 0;
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <h1>My First 2 App</h1>\n        <input type=\"text\" pInputText [(ngModel)]=\"text\" />\n        {{text}}\n        <p-slider [(ngModel)]=\"val\"></p-slider>\n        {{val}}\n    ",
+                        template: "\n        <h1>My First 2 App</h1>\n        <div id = \"container\" style = \"width:100%\">\n        <input type=\"text\" pInputText [(ngModel)]=\"val\" style = \"float:left; width: 25%;\"/>\n        <p-slider [(ngModel)]=\"val\" style = \"float:left; width: 75%;\"></p-slider>\n        </div>\n    ",
                         directives: [primeng_1.InputText, primeng_1.Slider]
                     }), 
                     __metadata('design:paramtypes', [])

@@ -1,4 +1,5 @@
-export declare class AppComponent {
+import { OnInit } from 'angular2/core';
+export declare class AppComponent implements OnInit {
     val: number;
-    text: string;
+    ngOnInit(): void;
 }
