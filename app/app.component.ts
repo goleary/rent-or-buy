@@ -9,33 +9,47 @@ import {SliderNumberComponent} from './shared/slider-number.component';
 })
 export class AppComponent implements OnInit
 {
-    rent: number;
-    principal: number;
-    monthlyPayment: number;
-    period: number;
-    
+    rent: number = 2000;
     rentString: string = "Monthly Rent: ";
+    maxRent: number = 5000;
+    
+    principal: number = 300000;
     principalString: string = "Total Principal: ";
-    mortgagePeriodString: string = "Amortization Period: ";
+    maxPrincipal: number = 1000000;
+    
+    monthlyPayment: number = 2000;
     monthlyPaymentString: string = "Monthly Payment: ";
+    maxMonthlyPayment: number = 8000;
+    
+    periodInMonths: number = 240;
+    mortgagePeriodString: string = "Amortization Period: ";
+    maxPeriod: number = 30;
+    
+    monthlyInterest: number = 0.005;
+    interestString: string = "Interest Rate: ";
     
     ngOnInit():void{
-        this.rent = 1000;
-        this.principal = 100000;
-        this.monthlyPayment = 1000;
-        this.period = 15;
     }
     
+    calculateMonthlyPayment(){
+        this.monthlyPayment = this.principal * this.monthlyInterest / (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)); 
+    }
+    calculatePrincipal(){
+        this.principal = this.monthlyPayment * (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)) / this.monthlyInterest;
+    }
     updateRent(rent: number){
         this.rent = rent;
     }
     updatePrincipal(principal: number){
         this.principal = principal;
+        this.calculateMonthlyPayment();
     }
     updatePeriod(period: number){
-        this.period = period;
+        this.periodInMonths = period * 12;
+        this.calculateMonthlyPayment();
     }
     updateMonthlyPayment(monthlyPayment: number){
         this.monthlyPayment = monthlyPayment;
+        this.calculatePrincipal()
     }
 }

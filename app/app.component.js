@@ -26,28 +26,43 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.rent = 2000;
                     this.rentString = "Monthly Rent: ";
+                    this.maxRent = 5000;
+                    this.principal = 300000;
                     this.principalString = "Total Principal: ";
-                    this.mortgagePeriodString = "Amortization Period: ";
+                    this.maxPrincipal = 1000000;
+                    this.monthlyPayment = 2000;
                     this.monthlyPaymentString = "Monthly Payment: ";
+                    this.maxMonthlyPayment = 8000;
+                    this.periodInMonths = 240;
+                    this.mortgagePeriodString = "Amortization Period: ";
+                    this.maxPeriod = 30;
+                    this.monthlyInterest = 0.005;
+                    this.interestString = "Interest Rate: ";
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this.rent = 1000;
-                    this.principal = 100000;
-                    this.monthlyPayment = 1000;
-                    this.period = 15;
+                };
+                AppComponent.prototype.calculateMonthlyPayment = function () {
+                    this.monthlyPayment = this.principal * this.monthlyInterest / (1 - Math.pow(1 + this.monthlyInterest, -this.periodInMonths));
+                };
+                AppComponent.prototype.calculatePrincipal = function () {
+                    this.principal = this.monthlyPayment * (1 - Math.pow(1 + this.monthlyInterest, -this.periodInMonths)) / this.monthlyInterest;
                 };
                 AppComponent.prototype.updateRent = function (rent) {
                     this.rent = rent;
                 };
                 AppComponent.prototype.updatePrincipal = function (principal) {
                     this.principal = principal;
+                    this.calculateMonthlyPayment();
                 };
                 AppComponent.prototype.updatePeriod = function (period) {
-                    this.period = period;
+                    this.periodInMonths = period * 12;
+                    this.calculateMonthlyPayment();
                 };
                 AppComponent.prototype.updateMonthlyPayment = function (monthlyPayment) {
                     this.monthlyPayment = monthlyPayment;
+                    this.calculatePrincipal();
                 };
                 AppComponent = __decorate([
                     core_1.Component({

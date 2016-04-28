@@ -1,14 +1,22 @@
 import { OnInit } from 'angular2/core';
 export declare class AppComponent implements OnInit {
     rent: number;
-    principal: number;
-    monthlyPayment: number;
-    period: number;
     rentString: string;
+    maxRent: number;
+    principal: number;
     principalString: string;
-    mortgagePeriodString: string;
+    maxPrincipal: number;
+    monthlyPayment: number;
     monthlyPaymentString: string;
+    maxMonthlyPayment: number;
+    periodInMonths: number;
+    mortgagePeriodString: string;
+    maxPeriod: number;
+    monthlyInterest: number;
+    interestString: string;
     ngOnInit(): void;
+    calculateMonthlyPayment(): void;
+    calculatePrincipal(): void;
     updateRent(rent: number): void;
     updatePrincipal(principal: number): void;
     updatePeriod(period: number): void;

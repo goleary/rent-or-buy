@@ -26,7 +26,24 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
                     this.sliderChanged = new core_1.EventEmitter();
                 }
                 SliderNumberComponent.prototype.onChanges = function () {
+                    //this.adjustMax();
                     this.sliderChanged.next(this.value);
+                };
+                //this is buggy as fuck lol
+                SliderNumberComponent.prototype.adjustMax = function () {
+                    // if (this.maxValue < (1.5 * this.value)){
+                    //     this.maxValue = 1.5 * this.value;
+                    // }
+                    // else if (this.maxValue > (3 * this.value)){
+                    //     if (3 * this.value < this.minimumMax){
+                    //         this.maxValue = this.minimumMax;
+                    //     }else{
+                    //         this.maxValue = 3 * this.value;
+                    //     }
+                    // }
+                };
+                SliderNumberComponent.prototype.ngOnInit = function () {
+                    //this.adjustMax();
                 };
                 __decorate([
                     core_1.Input(), 
@@ -36,6 +53,10 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
                     core_1.Input(), 
                     __metadata('design:type', String)
                 ], SliderNumberComponent.prototype, "labelText", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Number)
+                ], SliderNumberComponent.prototype, "maxValue", void 0);
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', core_1.EventEmitter)

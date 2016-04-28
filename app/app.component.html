@@ -1,9 +1,10 @@
 <h1>My First 2 App</h1>
-<slider-number #rentSlider [labelText]="rentString" [value]="rent" (sliderChanged)="updateRent($event)"></slider-number>
-<slider-number #principleSlider [labelText]="principalString" [value]="principal" (sliderChanged)="updatePrincipal($event)"></slider-number>
-<slider-number #monthlyPSlider [labelText]="monthlyPaymentString" [value]="monthlyPayment" (sliderChanged)="updateMonthlyPayment($event)"></slider-number>
-<slider-number #monthlyPSlider [labelText]="mortgagePeriodString" [value]="period" (sliderChanged)="updatePeriod($event)"></slider-number>
+<slider-number #rentSlider [labelText]="rentString" [value]="rent" [maxValue]="maxRent" (sliderChanged)="updateRent($event)"></slider-number>
+<slider-number #principleSlider [labelText]="principalString" [value]="principal" [maxValue]="maxPrincipal" (sliderChanged)="updatePrincipal($event)"></slider-number>
+<slider-number #monthlyPSlider [labelText]="monthlyPaymentString" [value]="monthlyPayment" [maxValue]="maxMonthlyPayment" (sliderChanged)="updateMonthlyPayment($event)"></slider-number>
+<slider-number #monthlyPSlider [labelText]="mortgagePeriodString" [value]="periodInMonths/12" [maxValue]="maxPeriod" (sliderChanged)="updatePeriod($event)"></slider-number>
 <div>rent {{rent}}</div>
 <div>principal {{principal}}</div>
 <div>monthlyPayment {{monthlyPayment}}</div>
-<div>period {{period}}</div>
+<div>periodInMonths {{periodInMonths}}</div>
+<div>monthlyInterest {{monthlyInterest}}</div>
