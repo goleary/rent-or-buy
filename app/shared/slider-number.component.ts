@@ -14,10 +14,11 @@ export class SliderNumberComponent implements OnInit{
     @Input() maxValue: number;
     @Output() sliderChanged: EventEmitter<number> = new EventEmitter<number>();
      
-    onChanges(): void {
-        //this.adjustMax();
-        this.sliderChanged.next(this.value);
+    onChanges(number): void {
+        this.value = number;
+        this.sliderChanged.next(number);
     }
+    
     
     //this is buggy as fuck lol
     adjustMax(){

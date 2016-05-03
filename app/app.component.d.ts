@@ -14,6 +14,7 @@ export declare class AppComponent implements OnInit {
     maxPeriod: number;
     monthlyInterest: number;
     interestString: string;
+    maxInterest: number;
     ngOnInit(): void;
     calculateMonthlyPayment(): void;
     calculatePrincipal(): void;
@@ -21,4 +22,5 @@ export declare class AppComponent implements OnInit {
     updatePrincipal(principal: number): void;
     updatePeriod(period: number): void;
     updateMonthlyPayment(monthlyPayment: number): void;
+    updateInterest(interest: number): void;
 }

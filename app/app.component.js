@@ -40,6 +40,7 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
                     this.maxPeriod = 30;
                     this.monthlyInterest = 0.005;
                     this.interestString = "Interest Rate: ";
+                    this.maxInterest = 0.08;
                 }
                 AppComponent.prototype.ngOnInit = function () {
                 };
@@ -63,6 +64,10 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
                 AppComponent.prototype.updateMonthlyPayment = function (monthlyPayment) {
                     this.monthlyPayment = monthlyPayment;
                     this.calculatePrincipal();
+                };
+                AppComponent.prototype.updateInterest = function (interest) {
+                    this.monthlyInterest = interest / 12;
+                    this.calculateMonthlyPayment();
                 };
                 AppComponent = __decorate([
                     core_1.Component({

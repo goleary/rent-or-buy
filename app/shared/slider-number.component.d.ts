@@ -4,7 +4,7 @@ export declare class SliderNumberComponent implements OnInit {
     labelText: string;
     maxValue: number;
     sliderChanged: EventEmitter<number>;
-    onChanges(): void;
+    onChanges(number: any): void;
     adjustMax(): void;
     ngOnInit(): void;
 }

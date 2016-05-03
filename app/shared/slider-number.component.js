@@ -25,9 +25,9 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
                 function SliderNumberComponent() {
                     this.sliderChanged = new core_1.EventEmitter();
                 }
-                SliderNumberComponent.prototype.onChanges = function () {
-                    //this.adjustMax();
-                    this.sliderChanged.next(this.value);
+                SliderNumberComponent.prototype.onChanges = function (number) {
+                    this.value = number;
+                    this.sliderChanged.next(number);
                 };
                 //this is buggy as fuck lol
                 SliderNumberComponent.prototype.adjustMax = function () {
