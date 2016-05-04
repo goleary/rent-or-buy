@@ -27,7 +27,7 @@ export class AppComponent implements OnInit
     
     monthlyInterest: number = 0.005;
     interestString: string = "Interest Rate: ";
-    maxInterest: number = 0.08;
+    maxInterest: number = 10;
     
     ngOnInit():void{
     }
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit
         this.calculatePrincipal()
     }
     updateInterest(interest: number){
-        this.monthlyInterest = interest / 12;
+        this.monthlyInterest = interest / 1200;
         this.calculateMonthlyPayment()
     }
 }

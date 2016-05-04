@@ -4,7 +4,7 @@
     <slider-number #principleSlider [labelText]="principalString" [value]="principal" [maxValue]="maxPrincipal" (sliderChanged)="updatePrincipal($event)"></slider-number>
     <slider-number #monthlyPSlider [labelText]="monthlyPaymentString" [value]="monthlyPayment" [maxValue]="maxMonthlyPayment" (sliderChanged)="updateMonthlyPayment($event)"></slider-number>
     <slider-number #periodSlider [labelText]="mortgagePeriodString" [value]="periodInMonths/12" [maxValue]="maxPeriod" (sliderChanged)="updatePeriod($event)"></slider-number>
-    <slider-number #interestSlider [labelText]="interestString" [value]="monthlyInterest*12" [maxValue]="maxInterest" (sliderChanged)="updateInterest($event)"></slider-number>
+    <slider-number #interestSlider [labelText]="interestString" [value]="monthlyInterest*1200" [maxValue]="maxInterest" (sliderChanged)="updateInterest($event)"></slider-number>
 </div>
 <div>rent {{rent}}</div>
 <div>principal {{principal}}</div>
