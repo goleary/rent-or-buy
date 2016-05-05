@@ -1,79 +1,42 @@
-import {Component, OnInit} from 'angular2/core';
-import {InputText, Slider} from 'primeng/primeng';
-import {SliderNumberComponent} from './shared/slider-number.component';
+import {Component} from 'angular2/core';
+import {CalculatorComponent} from './shared/calculator.component';
+import {AboutComponent} from './shared/about.component';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+
 
 @Component({
 	selector: 'my-app',
-	templateUrl: 'app/app.component.html',
-    directives: [InputText, Slider, SliderNumberComponent]
+	template: `
+        <h1>{{title}}</h1>
+        <nav>
+          <a [routerLink]="['Calculator']">Calculator</a>
+          <a [routerLink]="['About']">About</a>
+        </nav>
+        <router-outlet></router-outlet>
+    `,
+    directives: [ROUTER_DIRECTIVES],
+    providers: [
+        ROUTER_PROVIDERS
+    ],
+    styleUrls: ["app/app.component.css"]
 })
-export class AppComponent implements OnInit
+
+@RouteConfig([
+  {
+    path: '/calculator',
+    name: 'Calculator',
+    component: CalculatorComponent
+  }
+])
+
+@RouteConfig([
+  {
+    path: '/about',
+    name: 'About',
+    component: AboutComponent
+  }
+])
+export class AppComponent 
 {
-    rent: number = 2000;
-    rentString: string = "Monthly Rent: ";
-    maxRent: number = 5000;
-    
-    principal: number = 240000;
-    principalString: string = "Total Principal: ";
-    maxPrincipal: number = 800000;
-    
-    monthlyPayment: number = 2000;
-    monthlyPaymentString: string = "Monthly Payment: ";
-    maxMonthlyPayment: number = 8000;
-    
-    periodInMonths: number = 240;
-    mortgagePeriodString: string = "Amortization Period: ";
-    maxPeriod: number = 30;
-    
-    monthlyInterest: number = 0.005;
-    interestString: string = "Interest Rate: ";
-    maxInterest: number = 10;
-    
-    availFunds: number = 60000;
-    availFundsString: string = "Fund Available: ";
-    maxAvailFunds: number = 200000;
-    
-    houseValue: number = 300000;
-    houseValueString: string = "House Value: ";
-    maxhouseValue: number = 1000000;
-    
-    ngOnInit():void{
-    }
-    
-    calculateMonthlyPayment(){
-        this.monthlyPayment = this.principal * this.monthlyInterest / (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)); 
-    }
-    calculatePrincipal(){
-        this.principal = this.monthlyPayment * (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)) / this.monthlyInterest;
-        this.houseValue = this.principal + this.availFunds;
-    }
-    updateRent(rent: number){
-        this.rent = rent;
-    }
-    updatePrincipal(principal: number){
-        this.principal = principal;
-        this.houseValue = principal + this.availFunds;
-        this.calculateMonthlyPayment();
-    }
-    updatePeriod(period: number){
-        this.periodInMonths = period * 12;
-        this.calculateMonthlyPayment();
-    }
-    updateMonthlyPayment(monthlyPayment: number){
-        this.monthlyPayment = monthlyPayment;
-        this.calculatePrincipal()
-    }
-    updateInterest(interest: number){
-        this.monthlyInterest = interest / 1200;
-        this.calculateMonthlyPayment()
-    }
-    updateAvailFunds(availFunds: number){
-        this.availFunds = availFunds;
-        this.updatePrincipal(this.houseValue - availFunds);
-    }
-    updateHouseValue(houseValue: number){
-        this.houseValue = houseValue;
-        this.updatePrincipal(houseValue - this.availFunds);
-        
-    }
+    title: string = "test application";
 }
