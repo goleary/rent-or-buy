@@ -13,9 +13,9 @@ export class CalculatorComponent implements OnInit
     rentString: string = "Monthly Rent: ";
     maxRent: number = 5000;
     
-    principal: number = 300000;
+    principal: number = 240000;
     principalString: string = "Total Principal: ";
-    maxPrincipal: number = 1000000;
+    maxPrincipal: number = 800000;
     
     monthlyPayment: number = 2000;
     monthlyPaymentString: string = "Monthly Payment: ";
@@ -29,6 +29,14 @@ export class CalculatorComponent implements OnInit
     interestString: string = "Interest Rate: ";
     maxInterest: number = 10;
     
+    availFunds: number = 60000;
+    availFundsString: string = "Fund Available: ";
+    maxAvailFunds: number = 200000;
+    
+    houseValue: number = 300000;
+    houseValueString: string = "House Value: ";
+    maxhouseValue: number = 1000000;
+    
     ngOnInit():void{
     }
     
@@ -37,12 +45,14 @@ export class CalculatorComponent implements OnInit
     }
     calculatePrincipal(){
         this.principal = this.monthlyPayment * (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)) / this.monthlyInterest;
+        this.houseValue = this.principal + this.availFunds;
     }
     updateRent(rent: number){
         this.rent = rent;
     }
     updatePrincipal(principal: number){
         this.principal = principal;
+        this.houseValue = principal + this.availFunds;
         this.calculateMonthlyPayment();
     }
     updatePeriod(period: number){
@@ -56,5 +66,14 @@ export class CalculatorComponent implements OnInit
     updateInterest(interest: number){
         this.monthlyInterest = interest / 1200;
         this.calculateMonthlyPayment()
+    }
+    updateAvailFunds(availFunds: number){
+        this.availFunds = availFunds;
+        this.updatePrincipal(this.houseValue - availFunds);
+    }
+    updateHouseValue(houseValue: number){
+        this.houseValue = houseValue;
+        this.updatePrincipal(houseValue - this.availFunds);
+        
     }
 }
