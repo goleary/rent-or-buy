@@ -12,11 +12,11 @@ export class SliderNumberComponent implements OnInit{
     @Input() value: number;
     @Input() labelText: string;
     @Input() maxValue: number;
-    @Output() sliderChanged: EventEmitter<number> = new EventEmitter<number>();
+    @Output() valueChanged: EventEmitter<number> = new EventEmitter<number>();
      
     onChanges(number): void {
         this.value = number;
-        this.sliderChanged.next(number);
+        this.valueChanged.emit(this.value);
     }
     
     

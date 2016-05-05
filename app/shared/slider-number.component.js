@@ -23,11 +23,11 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
         execute: function() {
             SliderNumberComponent = (function () {
                 function SliderNumberComponent() {
-                    this.sliderChanged = new core_1.EventEmitter();
+                    this.valueChanged = new core_1.EventEmitter();
                 }
                 SliderNumberComponent.prototype.onChanges = function (number) {
                     this.value = number;
-                    this.sliderChanged.next(number);
+                    this.valueChanged.emit(this.value);
                 };
                 //this is buggy as fuck lol
                 SliderNumberComponent.prototype.adjustMax = function () {
@@ -60,7 +60,7 @@ System.register(['angular2/core', 'primeng/primeng'], function(exports_1, contex
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', core_1.EventEmitter)
-                ], SliderNumberComponent.prototype, "sliderChanged", void 0);
+                ], SliderNumberComponent.prototype, "valueChanged", void 0);
                 SliderNumberComponent = __decorate([
                     core_1.Component({
                         selector: 'slider-number',
