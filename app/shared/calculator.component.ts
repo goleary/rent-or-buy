@@ -37,6 +37,17 @@ export class CalculatorComponent implements OnInit
     houseValueString: string = "House Value: ";
     maxhouseValue: number = 1000000;
     
+    rentIncrease: number = 0.005;
+    rentIncreaseString: string = "Interest Rate: ";
+    maxRentIncrease: number = 10;
+    
+    cashReturn: number = 0.005;
+    cashReturnString: string = "Interest Rate: ";
+    maxCashReturn: number = 10;
+    
+    housingReturn: number = 0.005;
+    housingReturnString: string = "Interest Rate: ";
+    maxHousingReturn: number = 10;
     ngOnInit():void{
     }
     
@@ -74,6 +85,14 @@ export class CalculatorComponent implements OnInit
     updateHouseValue(houseValue: number){
         this.houseValue = houseValue;
         this.updatePrincipal(houseValue - this.availFunds);
-        
+    }
+    updateRentIncrease(rentIncrease: number){
+        this.rentIncrease = rentIncrease;
+    }
+    updateCashReturn(cashReturn: number){
+        this.cashReturn = cashReturn;
+    }
+    updateHousingReturn(housingReturn: number){
+        this.housingReturn = housingReturn;
     }
 }
