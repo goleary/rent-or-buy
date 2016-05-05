@@ -25,7 +25,8 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
   {
     path: '/calculator',
     name: 'Calculator',
-    component: CalculatorComponent
+    component: CalculatorComponent,
+    useAsDefault: true
   }
 ])
 
