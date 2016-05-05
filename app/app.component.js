@@ -29,9 +29,9 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
                     this.rent = 2000;
                     this.rentString = "Monthly Rent: ";
                     this.maxRent = 5000;
-                    this.principal = 300000;
+                    this.principal = 240000;
                     this.principalString = "Total Principal: ";
-                    this.maxPrincipal = 1000000;
+                    this.maxPrincipal = 800000;
                     this.monthlyPayment = 2000;
                     this.monthlyPaymentString = "Monthly Payment: ";
                     this.maxMonthlyPayment = 8000;
@@ -41,6 +41,12 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
                     this.monthlyInterest = 0.005;
                     this.interestString = "Interest Rate: ";
                     this.maxInterest = 10;
+                    this.availFunds = 60000;
+                    this.availFundsString = "Fund Available: ";
+                    this.maxAvailFunds = 200000;
+                    this.houseValue = 300000;
+                    this.houseValueString = "House Value: ";
+                    this.maxhouseValue = 1000000;
                 }
                 AppComponent.prototype.ngOnInit = function () {
                 };
@@ -49,12 +55,14 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
                 };
                 AppComponent.prototype.calculatePrincipal = function () {
                     this.principal = this.monthlyPayment * (1 - Math.pow(1 + this.monthlyInterest, -this.periodInMonths)) / this.monthlyInterest;
+                    this.houseValue = this.principal + this.availFunds;
                 };
                 AppComponent.prototype.updateRent = function (rent) {
                     this.rent = rent;
                 };
                 AppComponent.prototype.updatePrincipal = function (principal) {
                     this.principal = principal;
+                    this.houseValue = principal + this.availFunds;
                     this.calculateMonthlyPayment();
                 };
                 AppComponent.prototype.updatePeriod = function (period) {
@@ -68,6 +76,14 @@ System.register(['angular2/core', 'primeng/primeng', './shared/slider-number.com
                 AppComponent.prototype.updateInterest = function (interest) {
                     this.monthlyInterest = interest / 1200;
                     this.calculateMonthlyPayment();
+                };
+                AppComponent.prototype.updateAvailFunds = function (availFunds) {
+                    this.availFunds = availFunds;
+                    this.updatePrincipal(this.houseValue - availFunds);
+                };
+                AppComponent.prototype.updateHouseValue = function (houseValue) {
+                    this.houseValue = houseValue;
+                    this.updatePrincipal(houseValue - this.availFunds);
                 };
                 AppComponent = __decorate([
                     core_1.Component({

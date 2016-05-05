@@ -2,12 +2,9 @@
 <div>
     <slider-number #rentSlider [labelText]="rentString" [value]="rent" [maxValue]="maxRent" (sliderChanged)="updateRent($event)"></slider-number>
     <slider-number #principleSlider [labelText]="principalString" [value]="principal" [maxValue]="maxPrincipal" (sliderChanged)="updatePrincipal($event)"></slider-number>
+    <slider-number #interestSlider [labelText]="availFundsString" [value]="availFunds" [maxValue]="maxAvailFunds" (sliderChanged)="updateAvailFunds($event)"></slider-number>
+    <slider-number #interestSlider [labelText]="houseValueString" [value]="houseValue" [maxValue]="maxhouseValue" (sliderChanged)="updateHouseValue($event)"></slider-number>
     <slider-number #monthlyPSlider [labelText]="monthlyPaymentString" [value]="monthlyPayment" [maxValue]="maxMonthlyPayment" (sliderChanged)="updateMonthlyPayment($event)"></slider-number>
     <slider-number #periodSlider [labelText]="mortgagePeriodString" [value]="periodInMonths/12" [maxValue]="maxPeriod" (sliderChanged)="updatePeriod($event)"></slider-number>
     <slider-number #interestSlider [labelText]="interestString" [value]="monthlyInterest*1200" [maxValue]="maxInterest" (sliderChanged)="updateInterest($event)"></slider-number>
 </div>
-<div>rent {{rent}}</div>
-<div>principal {{principal}}</div>
-<div>monthlyPayment {{monthlyPayment}}</div>
-<div>periodInMonths {{periodInMonths}}</div>
-<div>monthlyInterest {{monthlyInterest}}</div>
