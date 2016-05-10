@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {CalculatorComponent} from './shared/calculator.component';
-import {AboutComponent} from './shared/about.component';
+import {CalculatorComponent} from './calculator/calculator.component';
+import {AboutComponent} from './about/about.component';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
 
@@ -39,5 +39,5 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
 ])
 export class AppComponent 
 {
-    title: string = "test application";
+    title: string = "Rent Or Buy";
 }
