@@ -174,6 +174,7 @@ export class CalculatorComponent implements OnInit
         this.calculateMonthlyPayment()
     }
     updateAvailFunds(availFunds: number){
+      debugger;
         this.availFunds = availFunds;
         this.updatePrincipal(this.houseValue - (availFunds - this.closingCosts));
     }
