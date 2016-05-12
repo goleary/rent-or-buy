@@ -13,21 +13,33 @@
     <slider-number #monthlyPSlider [labelText]="monthlyPaymentString" [value]="monthlyPayment" [maxValue]="maxMonthlyPayment" (sliderChanged)="updateMonthlyPayment($event)"></slider-number>
     <slider-number #periodSlider [labelText]="mortgagePeriodString" [value]="periodInMonths/12" [maxValue]="maxPeriod" (sliderChanged)="updatePeriod($event)"></slider-number>
     <slider-number #interestSlider [labelText]="interestString" [value]="monthlyInterest*1200" [maxValue]="maxInterest" (sliderChanged)="updateInterest($event)"></slider-number>
-    <!--need credit score-->
-    <!--need annual income-->
-    <!--need monthly debt-->
-    <!--need closing costs-->
+    
     <!--need property tax-->
     <!--need marginal tax rate-->
     <!--need various insurance for ownership-->
     <!--need home improvements/maintenance-->
+    <!--HOA-->
+    <!--PMI-->
+    
+    <!--determine loan size + interest rate-->
+      <!--need credit score-->
+      <!--need annual income-->
+      <!--need monthly debt-->
 </div><div style="width:55%;border-style: solid; display: table-cell;">
   RESERVED FOR CHART
 </div>
 </div>
-
+    <h3>hard coded values</h3>
+    <div>propertyTaxPercent: {{propertyTaxPercent}}</div>
+    <div>marginalTaxPercent: {{marginalTaxPercent}}</div>
+    <div>buyInsurance: {{buyInsurance}}</div>
+    <div>buyMaintenancePercent: {{buyMaintenancePercent}}</div>
+    <div>HOA: {{HOA}}</div>
+    
+    <h3>DEBUGGING</h3>
     <div>totalRent: {{totalRent}}</div>
     <div>rentArray: {{rentArray}}</div>
     <div>totalBuy: {{totalBuy}}</div>
     <div>buyArray: {{buyArray}}</div>
     <div>difference: {{difference}}</div>
+    

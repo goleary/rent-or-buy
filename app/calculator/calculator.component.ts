@@ -57,6 +57,13 @@ export class CalculatorComponent implements OnInit
     houseValueString: string = "House Value: ";
     maxHouseValue: number = 1000000;
     
+    //TEMP VALUES
+    propertyTaxPercent: number = 1.5;
+    buyInsurance: number = 1500;
+    buyMaintenancePercent: number = 1;
+    HOA: number = 3000;
+    marginalTaxPercent: number = 25;
+    
     //total cost to rent
     totalRent: number;
     //total cost to buy
@@ -91,13 +98,19 @@ export class CalculatorComponent implements OnInit
       var _houseValue = this.houseValue;
       for (var _i = 0; _i < this.yearsToMove; _i++) {
         //each year we need to make 12 payments and subtract from gained equity from house appreciation
-        var _buy =  12 * this.monthlyPayment - _houseValue * this.housingReturn / 100;
+        var _buy =  12 * this.monthlyPayment 
+        - _houseValue * (this.housingReturn - this.propertyTaxPercent - this.buyMaintenancePercent) / 100
+        + this.HOA
+        + this.buyInsurance;
         //there's 12 monthly payments compounded monthly
         for (var _month = 1; _month <= 12; _month++){
+          var _interest = _principal * this.monthlyInterest;
           //paid to principal per month
-          var _toPrincipal = this.monthlyPayment - _principal * this.monthlyInterest;
+          var _toPrincipal = this.monthlyPayment - _interest;
           //we gain equity in the house, so we subtract it from buying cost
           _buy -= _toPrincipal;
+          //we subtract marginal tax rate from our interest paid 
+          _buy -= _interest * this.marginalTaxPercent / 100;
           //subtract from principal our monthly payment
           _principal -= _toPrincipal;
         }
