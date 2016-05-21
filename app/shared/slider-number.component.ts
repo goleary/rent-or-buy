@@ -14,10 +14,10 @@ export class SliderNumberComponent implements OnInit{
     @Input() maxValue: number;
     @Output() sliderChanged: EventEmitter<number> = new EventEmitter<number>();
      
-    onChanges(number): void {
+    onChanges(number: number): void {
       debugger;
-        this.value = number;
-        this.sliderChanged.next(number);
+        this.value = +number;
+        this.sliderChanged.next(this.value);
     }
     
     
