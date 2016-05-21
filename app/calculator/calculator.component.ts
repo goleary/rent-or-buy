@@ -1,12 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {InputText, Slider} from 'primeng/primeng';
 import {SliderNumberComponent} from '../shared/slider-number.component';
 
 @Component({
 	selector: 'my-calculator',
 	templateUrl: 'app/calculator/calculator.component.html',
-    directives: [InputText, Slider, SliderNumberComponent],
-    changeDetection:ChangeDetectionStrategy.OnPush
+    directives: [InputText, Slider, SliderNumberComponent]
 })
 export class CalculatorComponent implements OnInit
 {
@@ -60,7 +59,7 @@ export class CalculatorComponent implements OnInit
     
     //TEMP VALUES
     propertyTaxPercent: number = 1.5;
-    buyInsurance: number = 2000;
+    buyInsurance: number = 1500;
     buyMaintenancePercent: number = 1;
     HOA: number = 3000;
     marginalTaxPercent: number = 25;
@@ -124,79 +123,66 @@ export class CalculatorComponent implements OnInit
     }
     
     calculateDifference(){
-        console.log("calculating difference");
       this.difference = this.totalRent - this.totalBuy;
     }
     
     calculateMonthlyPayment(){
-        console.log("calculating monthlyPayment");
         this.monthlyPayment = this.principal * this.monthlyInterest / (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths));
         this.calculateBuy() 
     }
     calculatePrincipal(){
-        console.log("calculating principal");
         this.principal = this.monthlyPayment * (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)) / this.monthlyInterest;
         this.houseValue = this.principal + this.availFunds;
         this.calculateBuy()
     }
     updateRent(rent: number){
-        console.log("updating rent");
         this.rent = rent;
         this.calculateRent();
     }
     updateYearsToMove(yearsToMove: number){  
-        console.log("updating yearsToMove");
         this.yearsToMove = yearsToMove;
         this.calculateRent();
         this.calculateBuy();
     }
     updateRentIncrease(rentIncrease: number){  
-        console.log("updating rentIncrease");
         this.rentIncrease = rentIncrease;
         this.calculateRent();
     }
     updateCashReturn(cashReturn: number){
-        console.log("updatingcashReturnrent");
         this.cashReturn = cashReturn;
         this.calculateRent();
     }
     updateHousingReturn(housingReturn: number){
-        console.log("updating housingReturn");
         this.housingReturn = housingReturn;
         this.calculateBuy()
     }
     updatePrincipal(principal: number){
-        debugger;
         this.principal = principal;
-        this.houseValue = this.principal + this.availFunds - this.closingCosts;
+        this.houseValue = principal + this.availFunds - this.closingCosts;
         this.calculateMonthlyPayment();
     }
     updatePeriod(period: number){
-        console.log("updating periodInMonths");
         this.periodInMonths = period * 12;
         this.calculateMonthlyPayment();
     }
     updateMonthlyPayment(monthlyPayment: number){
-        console.log("updating monthlyPayment");
         this.monthlyPayment = monthlyPayment;
         this.calculatePrincipal()
     }
     updateInterest(interest: number){
-        console.log("updating monthlyInterest");
         this.monthlyInterest = interest / 1200;
         this.calculateMonthlyPayment()
     }
     updateAvailFunds(availFunds: number){
-        console.log("updating availFunds");
+      debugger;
         this.availFunds = availFunds;
         this.updatePrincipal(this.houseValue - (availFunds - this.closingCosts));
     }
     updateHouseValue(houseValue: number){
-        console.log("updating houseValue");
+        this.houseValue = houseValue;
         this.updatePrincipal(houseValue - (this.availFunds - this.closingCosts));
     }
     updateClosingCosts(closingCosts: number){
-        console.log("updating closingCosts");
         this.closingCosts = closingCosts;
         this.updatePrincipal(this.houseValue - (this.availFunds - closingCosts));
     }
