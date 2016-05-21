@@ -64,11 +64,7 @@ export class CalculatorComponent implements OnInit
     buyMaintenancePercent: number = 1;
     HOA: number = 3000;
     marginalTaxPercent: number = 25;
-    
-    //total cost to rent
-    totalRent: number;
-    //total cost to buy
-    totalBuy: number;
+   
     //difference in cost
     difference: number;
     
@@ -76,33 +72,33 @@ export class CalculatorComponent implements OnInit
     buyArray: number[];
     ngOnInit():void{
       this.calculateRent();
+      
       this.calculateMonthlyPayment();
     }
     calculateRent(){
+      console.log("calculating rent array");
       this.rentArray = [];
-      this.totalRent = 0;
-      for (var _i = 0; _i < this.yearsToMove; _i++) {
+      var _periodInYears = this.periodInMonths / 12;
+      for (var _i = 0; _i < _periodInYears; _i++) {
         //rent with yearly increase - return on investments
         var _rent = (this.rent*12) * Math.pow((1 + this.rentIncrease / 100),_i) - this.availFunds * Math.pow((1 + this.cashReturn / 100), _i) * (this.cashReturn / 100);
         this.rentArray.push(_rent);
-        this.totalRent += _rent;
       }
-      this.calculateDifference();
     }
     calculateBuy(){
+      console.log("calculating buy array");
       this.buyArray = [];
-      //cost starts at closingCost;
-      this.totalBuy = this.closingCosts;
       //local var track principal as we pay it off
       var _principal = this.principal;
       //local var to track house value per year
       var _houseValue = this.houseValue;
-      for (var _i = 0; _i < this.yearsToMove; _i++) {
+      var _periodInYears = this.periodInMonths / 12;
+      for (var _i = 0; _i < _periodInYears; _i++) {
         //each year we need to make 12 payments and subtract from gained equity from house appreciation
         var _buy =  12 * this.monthlyPayment 
-        - _houseValue * (this.housingReturn - this.propertyTaxPercent - this.buyMaintenancePercent) / 100
-        + this.HOA
-        + this.buyInsurance;
+          - _houseValue * (this.housingReturn - this.propertyTaxPercent - this.buyMaintenancePercent) / 100
+          + this.HOA
+          + this.buyInsurance;
         //there's 12 monthly payments compounded monthly
         for (var _month = 1; _month <= 12; _month++){
           var _interest = _principal * this.monthlyInterest;
@@ -115,58 +111,64 @@ export class CalculatorComponent implements OnInit
           //subtract from principal our monthly payment
           _principal -= _toPrincipal;
         }
-        this.totalBuy +=  _buy;
         this.buyArray.push(_buy);
         //housingValue goes up!
         _houseValue = _houseValue * (1 + this.housingReturn / 100)
       }
-      this.calculateDifference();
     }
     
     calculateDifference(){
         console.log("calculating difference");
-      this.difference = this.totalRent - this.totalBuy;
+        var _difference = 0
+        for ( var _i = 0; _i < this.yearsToMove; _i ++){
+          _difference += this.rentArray[_i] - this.buyArray[_i];
+        }
+        this.difference = _difference;
     }
     
     calculateMonthlyPayment(){
         console.log("calculating monthlyPayment");
         this.monthlyPayment = this.principal * this.monthlyInterest / (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths));
-        this.calculateBuy() 
+        this.calculateBuy();
+        this.calculateDifference();
     }
     calculatePrincipal(){
         console.log("calculating principal");
         this.principal = this.monthlyPayment * (1-Math.pow(1 + this.monthlyInterest,-this.periodInMonths)) / this.monthlyInterest;
         this.houseValue = this.principal + this.availFunds;
-        this.calculateBuy()
+        this.calculateBuy();
+        this.calculateDifference();
     }
     updateRent(rent: number){
         console.log("updating rent");
         this.rent = rent;
         this.calculateRent();
+        this.calculateDifference();
     }
     updateYearsToMove(yearsToMove: number){  
         console.log("updating yearsToMove");
         this.yearsToMove = yearsToMove;
-        this.calculateRent();
-        this.calculateBuy();
+        this.calculateDifference();
     }
     updateRentIncrease(rentIncrease: number){  
         console.log("updating rentIncrease");
         this.rentIncrease = rentIncrease;
         this.calculateRent();
+        this.calculateDifference();
     }
     updateCashReturn(cashReturn: number){
         console.log("updatingcashReturnrent");
         this.cashReturn = cashReturn;
         this.calculateRent();
+        this.calculateDifference();
     }
     updateHousingReturn(housingReturn: number){
         console.log("updating housingReturn");
         this.housingReturn = housingReturn;
-        this.calculateBuy()
+        this.calculateBuy();
+        this.calculateDifference();
     }
     updatePrincipal(principal: number){
-        debugger;
         this.principal = principal;
         this.houseValue = this.principal + this.availFunds - this.closingCosts;
         this.calculateMonthlyPayment();
@@ -179,12 +181,12 @@ export class CalculatorComponent implements OnInit
     updateMonthlyPayment(monthlyPayment: number){
         console.log("updating monthlyPayment");
         this.monthlyPayment = monthlyPayment;
-        this.calculatePrincipal()
+        this.calculatePrincipal();
     }
     updateInterest(interest: number){
         console.log("updating monthlyInterest");
         this.monthlyInterest = interest / 1200;
-        this.calculateMonthlyPayment()
+        this.calculateMonthlyPayment();
     }
     updateAvailFunds(availFunds: number){
         console.log("updating availFunds");
