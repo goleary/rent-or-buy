@@ -15,8 +15,8 @@ export class SliderNumberComponent implements OnInit{
     @Output() sliderChanged: EventEmitter<number> = new EventEmitter<number>();
      
     onChanges(number: number): void {
+      debugger;
         this.value = +number;
-        console.log("Updating Slider " + this.labelText + " to:  "+ this.value);
         this.sliderChanged.next(this.value);
     }
     
