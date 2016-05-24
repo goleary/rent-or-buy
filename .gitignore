@@ -3,3 +3,4 @@ build/
 app/**/*.js
 app/**/*.d.ts
 app/**/*.map
+typings/
