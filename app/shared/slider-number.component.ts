@@ -15,9 +15,11 @@ export class SliderNumberComponent implements OnInit{
     @Output() sliderChanged: EventEmitter<number> = new EventEmitter<number>();
      
     onChanges(number: number): void {
-        this.value = +number;
-        console.log("Updating Slider " + this.labelText + " to:  "+ this.value);
-        this.sliderChanged.next(this.value);
+        console.log("Updating Slider " + this.labelText + " from: " + this.value + " to:  "+ number);
+        if (+number != this.value){
+          this.value = +number;
+          this.sliderChanged.next(this.value);
+        }
     }
     
     

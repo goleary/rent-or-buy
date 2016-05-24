@@ -1,11 +1,11 @@
 import {Component, OnInit, ChangeDetectionStrategy} from 'angular2/core';
-import {InputText, Slider} from 'primeng/primeng';
 import {SliderNumberComponent} from '../shared/slider-number.component';
+import { CHART_DIRECTIVES } from 'angular2-highcharts'; 
 
 @Component({
 	selector: 'my-calculator',
 	templateUrl: 'app/calculator/calculator.component.html',
-    directives: [InputText, Slider, SliderNumberComponent],
+    directives: [CHART_DIRECTIVES, SliderNumberComponent],
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class CalculatorComponent implements OnInit
@@ -70,6 +70,20 @@ export class CalculatorComponent implements OnInit
     
     rentArray: number[];
     buyArray: number[];
+    
+    differenceArray: number[];
+    
+    options: Object;
+    
+    constructor()  {
+        debugger;
+        this.options = {
+            title : { text : 'simple chart' },
+            series: [{
+                data: [29.9, 71.5, 106.4, 129.2],
+            }]
+        };
+    } 
     ngOnInit():void{
       this.calculateRent();
       

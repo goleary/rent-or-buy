@@ -1,5 +1,5 @@
 <div id = "rent-container" style = "width:100%">
     <label style = "float:left; width: 25%;" >{{labelText}}</label>
-    <p-slider [(ngModel)]="value" [max]="maxValue" style = "float:left; vertical-align: middle; width: 50%;" (onChange)="onChanges()"></p-slider>
-    <input type="number" pInputText [(ngModel)]="value" style = "float:left; width: 25%; text-align: right; padding-right: 15px;" (input)="onChanges()"/>
+    <p-slider [ngModel]="value" [max]="maxValue" style = "float:left; vertical-align: middle; width: 50%;" (onChange)="onChanges()"></p-slider>
+    <input type="number" pInputText [ngModel]="value" style = "float:left; width: 25%; text-align: right; padding-right: 15px;" (input)="onChanges()"/>
 </div>
