@@ -8,7 +8,7 @@ import { CHART_DIRECTIVES } from 'angular2-highcharts';
     directives: [CHART_DIRECTIVES, SliderNumberComponent],
     changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class CalculatorComponent implements OnInit
+export class CalculatorComponent
 {
     rent: number = 2000;
     rentString: string = "Monthly Rent: ";
@@ -38,7 +38,7 @@ export class CalculatorComponent implements OnInit
     monthlyPaymentString: string = "Monthly Payment: ";
     maxMonthlyPayment: number = 8000;
     
-    periodInMonths: number = 240;
+    periodInMonths: number = 360;
     mortgagePeriodString: string = "Amortization Period: ";
     maxPeriod: number = 30;
     
@@ -73,22 +73,25 @@ export class CalculatorComponent implements OnInit
     
     differenceArray: number[];
     
+    chart: Object;
     options: Object;
     
     constructor()  {
-        debugger;
         this.options = {
             title : { text : 'simple chart' },
             series: [{
-                data: [29.9, 71.5, 106.4, 129.2],
+                data: []
             }]
         };
     } 
-    ngOnInit():void{
+    
+    saveInstance(chartInstance) {
+      debugger;
+        this.chart = chartInstance;
       this.calculateRent();
-      
       this.calculateMonthlyPayment();
     }
+    
     calculateRent(){
       console.log("calculating rent array");
       this.rentArray = [];
@@ -133,11 +136,16 @@ export class CalculatorComponent implements OnInit
     
     calculateDifference(){
         console.log("calculating difference");
-        var _difference = 0
-        for ( var _i = 0; _i < this.yearsToMove; _i ++){
-          _difference += this.rentArray[_i] - this.buyArray[_i];
+        var _difference = 0;
+        this.differenceArray = [];
+        var _periodInYears = this.periodInMonths / 12;
+        for ( var _i = 0; _i < _periodInYears; _i ++){
+            _difference += this.rentArray[_i] - this.buyArray[_i];
+          this.differenceArray.push(_difference);
         }
-        this.difference = _difference;
+        this.chart.series[0].remove(true);
+        this.chart.addSeries({data: this.differenceArray}, true);
+        this.difference = this.differenceArray[this.yearsToMove];
     }
     
     calculateMonthlyPayment(){
@@ -162,7 +170,7 @@ export class CalculatorComponent implements OnInit
     updateYearsToMove(yearsToMove: number){  
         console.log("updating yearsToMove");
         this.yearsToMove = yearsToMove;
-        this.calculateDifference();
+        this.difference = this.differenceArray[this.yearsToMove];
     }
     updateRentIncrease(rentIncrease: number){  
         console.log("updating rentIncrease");

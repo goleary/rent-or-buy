@@ -26,7 +26,7 @@
       <!--need annual income-->
       <!--need monthly debt-->
 </div><div style="width:55%;border-style: solid; display: table-cell;">
-  <chart [options]="options"></chart>
+  <chart style="border-style: solid;" [options]="options" (load)="saveInstance($event.context)"></chart>
 </div>
 </div>
     <h3>hard coded values</h3>
