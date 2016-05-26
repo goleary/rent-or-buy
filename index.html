@@ -23,11 +23,15 @@
         System.config({
             defaultJSExtensions: true,
             packages: {
-                'app': {"defaultExtension": 'js'}
+                'app': {'defaultExtension': 'js'},
+                'angular2-highcharts' : { main: 'index',format: 'cjs', defaultExtension: 'js' },
             },
             map: {
                 'angular2': 'node_modules/angular2',
-                'primeng': 'node_modules/primeng'
+                '@angular': 'node_modules/angular2',  // hack to get angular2-highcharts working (it expects angular2 rc1, not beta as we are using)
+                'primeng': 'node_modules/primeng',
+                'angular2-highcharts': 'node_modules/angular2-highcharts/dist',
+                'highcharts/highstock.src': 'node_modules/highcharts/highstock.js'
             }
         });
         System.import('app/boot').then(null, console.error.bind(console));
