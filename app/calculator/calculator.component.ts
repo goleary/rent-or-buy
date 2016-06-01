@@ -30,7 +30,7 @@ export class CalculatorComponent
     housingReturnString: string = "Annual Housing Price Increase: ";
     maxHousingReturn: number = 10;
     
-    principal: number = 240000;
+    principal: number = 400000;
     principalString: string = "Total Principal: ";
     maxPrincipal: number = 800000;
     
@@ -46,15 +46,15 @@ export class CalculatorComponent
     interestString: string = "Interest Rate: ";
     maxInterest: number = 10;
     
-    availFunds: number = 63000;
+    availFunds: number = 105000;
     availFundsString: string = "Fund Available: ";
     maxAvailFunds: number = 200000;
     
-    closingCosts: number = 3000;
+    closingCosts: number = 5000;
     closingCostsString: string = "Total Closing Costs: ";
     maxClosingCosts: number = 10000;
     
-    houseValue: number = 300000;
+    houseValue: number = 500000;
     houseValueString: string = "House Value: ";
     maxHouseValue: number = 1000000;
     
@@ -78,7 +78,30 @@ export class CalculatorComponent
     
     constructor()  {
         this.options = {
-            title : { text : 'simple chart' },
+            chart: {
+                type: 'areaspline'
+            },
+            title : { 
+              text : 'Overall Cost of Renting over Buying' 
+            },
+            legends : {
+              enabled: false
+            },
+            plotOptions: {
+              line:{
+              },
+              areaspline: {
+                  fillOpacity: 0.5,
+                  color: "#FF0000",
+                  threshold: 0,
+                  negativeColor: '#008000', 
+                  animation: false,
+                  marker:{
+                    name: "circle",
+                    enabled: false
+                  }
+              }            
+            },
             series: [{
                 data: []
             }]
